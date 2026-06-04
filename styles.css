@@ -1,0 +1,341 @@
+:root {
+  color-scheme: dark;
+  --bg: #03060b;
+  --panel: rgba(8, 14, 24, 0.78);
+  --panel-strong: rgba(12, 19, 31, 0.92);
+  --line: rgba(148, 190, 255, 0.18);
+  --text: #f3f7ff;
+  --muted: #91a3bc;
+  --blue: #2aa8ff;
+  --blue-soft: rgba(42, 168, 255, 0.18);
+  --fire: #ff7a1a;
+  --radius: 8px;
+  font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--bg);
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 78% 18%, rgba(42, 168, 255, 0.14), transparent 30rem),
+    radial-gradient(circle at 12% 72%, rgba(255, 122, 26, 0.12), transparent 26rem),
+    linear-gradient(180deg, #02040a 0%, #07101b 52%, #03060b 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 26px 0 34px;
+}
+
+.hero {
+  position: relative;
+  min-height: 44vh;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero__backdrop {
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  background:
+    linear-gradient(180deg, rgba(3, 6, 11, 0.18), rgba(3, 6, 11, 0.86)),
+    url("assets/wadzon-banner.jpg") center / cover no-repeat;
+  filter: saturate(1.08);
+  opacity: 0.78;
+}
+
+.hero__content {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  padding: 44px 0 56px;
+}
+
+.brand-banner {
+  width: min(760px, 100%);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius);
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.58), 0 0 48px rgba(42, 168, 255, 0.18);
+}
+
+.brand-subtitle {
+  margin: 0;
+  color: #d7e6ff;
+  font-size: clamp(17px, 2vw, 24px);
+  font-weight: 600;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+.release,
+.links,
+.contact {
+  margin-top: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.release {
+  display: grid;
+  grid-template-columns: minmax(230px, 360px) 1fr;
+  gap: clamp(22px, 4vw, 46px);
+  align-items: center;
+  padding: clamp(18px, 4vw, 34px);
+}
+
+.release__cover-wrap {
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #05070a;
+  box-shadow: 0 0 0 1px rgba(255, 122, 26, 0.22), 0 30px 70px rgba(0, 0, 0, 0.42);
+}
+
+.release__cover {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.section-label {
+  margin: 0 0 10px;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  overflow-wrap: anywhere;
+}
+
+h1 {
+  margin: 0;
+  max-width: 720px;
+  font-size: clamp(40px, 8vw, 88px);
+  line-height: 0.92;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  text-shadow: 0 0 24px rgba(255, 122, 26, 0.2);
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 44px);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.release__text {
+  max-width: 620px;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.release__actions,
+.contact__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.button,
+.link-card,
+.contact-link {
+  min-height: 48px;
+  border-radius: var(--radius);
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  padding: 0 22px;
+  border: 1px solid transparent;
+  font-weight: 800;
+}
+
+.button--primary {
+  background: linear-gradient(135deg, var(--fire), #ffd36b);
+  color: #100703;
+  box-shadow: 0 14px 34px rgba(255, 122, 26, 0.24);
+}
+
+.button--ghost {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  color: #dce9ff;
+}
+
+.links {
+  padding: clamp(18px, 4vw, 34px);
+}
+
+.link-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.link-card {
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  min-height: 96px;
+  padding: 18px;
+  border: 1px solid rgba(148, 190, 255, 0.2);
+  background: var(--panel-strong);
+}
+
+.link-card span {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.link-card small {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.link-card--pending,
+.contact-link--pending {
+  color: rgba(243, 247, 255, 0.62);
+  cursor: default;
+}
+
+.contact {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  padding: 22px clamp(18px, 4vw, 34px);
+  background: rgba(8, 14, 24, 0.52);
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 16px;
+  border: 1px solid rgba(148, 190, 255, 0.16);
+  background: rgba(255, 255, 255, 0.035);
+  color: #d5e2f6;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+a:not([aria-disabled="true"]):hover {
+  transform: translateY(-2px);
+}
+
+.button--ghost:hover,
+.link-card:not(.link-card--pending):hover,
+.contact-link:not(.contact-link--pending):hover {
+  border-color: rgba(42, 168, 255, 0.52);
+  background: var(--blue-soft);
+}
+
+@media (max-width: 880px) {
+  .site-shell {
+    width: min(100% - 24px, 720px);
+  }
+
+  .hero {
+    min-height: 38vh;
+  }
+
+  .release {
+    grid-template-columns: 1fr;
+  }
+
+  .release__cover-wrap {
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .link-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact {
+    display: block;
+  }
+}
+
+@media (max-width: 540px) {
+  .site-shell {
+    width: min(100% - 18px, 420px);
+    padding-top: 12px;
+  }
+
+  .hero__content {
+    padding: 28px 0 38px;
+  }
+
+  .brand-banner {
+    aspect-ratio: 1.65;
+  }
+
+  .release,
+  .links,
+  .contact {
+    margin-top: 16px;
+  }
+
+  .release__text {
+    font-size: 16px;
+  }
+
+  .release__actions,
+  .contact__links {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .link-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .link-card {
+    min-height: 78px;
+  }
+}
