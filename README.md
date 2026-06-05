@@ -11,6 +11,6 @@
 
 ## Ссылки на площадки
 
-На странице заполнены VK, YouTube, BandLink, Telegram, TikTok, MAX, Avito, личный Telegram, личный VK и почта.
+На странице заполнены VK, YouTube, BandLink, Telegram, TikTok, MAX, Rutube, Avito, личный Telegram, личный VK, личный MAX и почта.
 
 Сайт рассчитан на деплой как HTML/CSS/JS из корня репозитория `/`.
