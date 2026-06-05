@@ -45,7 +45,7 @@ a {
 
 .hero {
   position: relative;
-  min-height: 44vh;
+  min-height: 28vh;
   display: grid;
   align-items: center;
   overflow: hidden;
@@ -56,27 +56,28 @@ a {
   position: absolute;
   inset: 0 calc(50% - 50vw);
   background:
-    linear-gradient(180deg, rgba(3, 6, 11, 0.18), rgba(3, 6, 11, 0.86)),
-    url("assets/wadzon-banner.jpg") center / cover no-repeat;
-  filter: saturate(1.08);
-  opacity: 0.78;
+    radial-gradient(circle at 50% 44%, rgba(42, 168, 255, 0.14), transparent 34rem),
+    linear-gradient(180deg, rgba(3, 6, 11, 0.12), rgba(3, 6, 11, 0.88));
+  opacity: 1;
 }
 
 .hero__content {
   position: relative;
   display: grid;
   justify-items: center;
-  gap: 18px;
-  padding: 44px 0 56px;
+  gap: 14px;
+  padding: 24px 0 34px;
 }
 
 .brand-banner {
-  width: min(760px, 100%);
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
+  width: min(600px, 100%);
+  max-height: 260px;
+  aspect-ratio: 2 / 1;
+  object-fit: contain;
   object-position: center;
   border-radius: var(--radius);
-  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.58), 0 0 48px rgba(42, 168, 255, 0.18);
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 18px 56px rgba(0, 0, 0, 0.42), 0 0 34px rgba(42, 168, 255, 0.12);
 }
 
 .brand-subtitle {
@@ -207,7 +208,7 @@ h2 {
 
 .link-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 12px;
   margin-top: 22px;
 }
@@ -275,7 +276,7 @@ a:not([aria-disabled="true"]):hover {
   }
 
   .hero {
-    min-height: 38vh;
+    min-height: 26vh;
   }
 
   .release {
@@ -289,7 +290,7 @@ a:not([aria-disabled="true"]):hover {
   }
 
   .link-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .contact {
@@ -304,11 +305,11 @@ a:not([aria-disabled="true"]):hover {
   }
 
   .hero__content {
-    padding: 28px 0 38px;
+    padding: 18px 0 28px;
   }
 
   .brand-banner {
-    aspect-ratio: 1.65;
+    aspect-ratio: 2 / 1;
   }
 
   .release,
