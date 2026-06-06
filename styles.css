@@ -158,6 +158,22 @@ h2 {
   line-height: 1.55;
 }
 
+.audio-player {
+  width: min(100%, 620px);
+  margin-top: 22px;
+  padding: 12px;
+  border: 1px solid rgba(148, 190, 255, 0.2);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.audio-player audio {
+  display: block;
+  width: 100%;
+  height: 42px;
+  accent-color: var(--fire);
+}
+
 .release__actions,
 .contact__links {
   display: flex;
