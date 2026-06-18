@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="WADZON — авторский музыкальный проект. Первый релиз: Не делай потише.">
+    <meta name="description" content="WADZON — авторский музыкальный проект. Не делай потише. Это не шум — это я.">
     <meta property="og:title" content="WADZON">
-    <meta property="og:description" content="Авторский музыкальный проект. Первый релиз: Не делай потише.">
+    <meta property="og:description" content="Авторский музыкальный проект WADZON. Треки, релизы, площадки и песни на заказ.">
     <meta property="og:image" content="assets/ne-delay-potishe-cover.jpg">
     <meta property="og:type" content="website">
     <!-- Yandex.Metrika counter -->
@@ -28,85 +28,86 @@
     <link rel="icon" href="assets/wadzon-avatar.png">
     <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
-    <main class="site-shell">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero__backdrop" aria-hidden="true"></div>
-        <div class="hero__content">
-          <img class="brand-banner" src="assets/wadzon-banner.jpg" alt="WADZON">
-          <p id="hero-title" class="brand-subtitle">авторский музыкальный проект</p>
+  <body class="theme-artist">
+    <header class="topbar">
+      <a class="topbar__brand" href="index.html" aria-current="page">
+        <img src="assets/wadzon-avatar.png" alt="">
+        <span>WADZON</span>
+      </a>
+      <nav class="topbar__nav" aria-label="Основная навигация">
+        <a href="index.html" aria-current="page">Главная</a>
+        <a href="songs.html">Песня на заказ</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="artist-hero" aria-labelledby="hero-title">
+        <div class="artist-hero__media">
+          <img src="assets/wadzon-banner.jpg" alt="WADZON">
+        </div>
+        <div class="artist-hero__content">
+          <p class="eyebrow">авторский музыкальный проект</p>
+          <h1 id="hero-title">WADZON</h1>
+          <p class="hero-line">Не делай потише.</p>
+          <p class="hero-tagline">Это не шум — это я.</p>
+          <div class="hero-actions">
+            <a class="button button--primary" href="https://band.link/UjQLh" target="_blank" rel="noopener" data-metrika-goal="listen_click bandlink_click">Слушать WADZON</a>
+            <a class="button button--ghost" href="contacts.html">Площадки</a>
+          </div>
         </div>
       </section>
 
-      <section class="release" aria-labelledby="release-title">
-        <div class="release__cover-wrap">
-          <img class="release__cover" src="assets/ne-delay-potishe-cover.jpg" alt="Обложка трека Не делай потише">
+      <section class="feature-track" aria-labelledby="main-track-title">
+        <div class="track-cover">
+          <img src="assets/ne-delay-potishe-cover.jpg" alt="Обложка трека Не делай потише">
         </div>
-        <div class="release__body">
-          <p class="section-label">первый релиз WADZON</p>
-          <h1 id="release-title">Не делай потише</h1>
-          <p class="release__text">Громкий старт проекта: плотный бас, ночной драйв и фраза, которую не хочется убавлять.</p>
-          <div class="audio-player" aria-label="Плеер трека Не делай потише">
+        <div class="track-copy">
+          <p class="eyebrow">главный трек</p>
+          <h2 id="main-track-title">Не делай потише</h2>
+          <p>Первый заметный трек WADZON: бас, дорога, ночной драйв и фраза, которую не хочется убавлять.</p>
+          <div class="audio-box" aria-label="Плеер трека Не делай потише">
             <audio controls preload="metadata">
               <source src="assets/ne-delay-potishe.mp3" type="audio/mpeg">
               Ваш браузер не поддерживает встроенный аудиоплеер.
             </audio>
           </div>
-          <div class="release__actions">
-            <a class="button button--primary" href="https://band.link/UjQLh" target="_blank" rel="noopener" data-metrika-goal="listen_click bandlink_click">BandLink</a>
-          </div>
         </div>
       </section>
 
-      <section class="links" aria-labelledby="links-title">
-        <p class="section-label">площадки проекта</p>
-        <h2 id="links-title">WADZON в сети</h2>
-        <div class="link-grid">
-          <a class="link-card" href="https://vk.com/wadzonvk" target="_blank" rel="noopener" data-metrika-goal="vk_click">
-            <span>VK</span>
-            <small>группа WADZON</small>
-          </a>
-          <a class="link-card" href="https://www.youtube.com/@Wadzon" target="_blank" rel="noopener" data-metrika-goal="youtube_click">
-            <span>YouTube</span>
-            <small>@Wadzon</small>
-          </a>
-          <a class="link-card" href="https://band.link/UjQLh" target="_blank" rel="noopener" data-metrika-goal="bandlink_click">
-            <span>BandLink</span>
-            <small>слушать релиз</small>
-          </a>
-          <a class="link-card" href="https://t.me/WadzonTG" target="_blank" rel="noopener" data-metrika-goal="telegram_click">
-            <span>Telegram</span>
-            <small>@WadzonTG</small>
-          </a>
-          <a class="link-card" href="https://www.tiktok.com/@wadzon_tt" target="_blank" rel="noopener" data-metrika-goal="tiktok_click">
-            <span>TikTok</span>
-            <small>@wadzon_tt</small>
-          </a>
-          <a class="link-card" href="https://max.ru/join/4tQyRK6sDOXwYp_Ja3aoZ1eS01UzzPYCEsbGAsnVDXQ" target="_blank" rel="noopener">
-            <span>MAX</span>
-            <small>канал WADZON</small>
-          </a>
-          <a class="link-card" href="https://rutube.ru/channel/78959362" target="_blank" rel="noopener">
-            <span>Rutube</span>
-            <small>канал WADZON</small>
-          </a>
-        </div>
-      </section>
-
-      <section class="contact" aria-labelledby="contact-title">
+      <section class="release-strip" aria-labelledby="other-release-title">
         <div>
-          <p class="section-label">связь</p>
-          <h2 id="contact-title">Связаться</h2>
+          <p class="eyebrow">дополнительный релиз</p>
+          <h2 id="other-release-title">333</h2>
+          <p>Экспериментальный трек WADZON. Дополнительная точка проекта рядом с главным релизом.</p>
         </div>
-        <div class="contact__links">
-          <a class="contact-link" href="https://t.me/wadzon" target="_blank" rel="noopener" data-metrika-goal="telegram_click">Telegram @wadzon</a>
-          <a class="contact-link" href="https://vk.ru/valkovv" target="_blank" rel="noopener" data-metrika-goal="vk_click">личный VK</a>
-          <a class="contact-link" href="https://max.ru/u/f9LHodD0cOKFr-X5TdwsnMlxlibObtLlOvaGqUcnDfiwzpKHtDQ3rahYqVs" target="_blank" rel="noopener">MAX личный</a>
-          <a class="contact-link" href="https://www.avito.ru/brands/i24442157" target="_blank" rel="noopener" data-metrika-goal="avito_click">Avito</a>
-          <a class="contact-link" href="mailto:wadzon@yandex.ru">wadzon@yandex.ru</a>
+        <div class="mini-release">
+          <img src="assets/wadzon-333-cover.jpg" alt="Обложка трека 333">
+          <audio controls preload="none">
+            <source src="assets/wadzon-333-preview.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </section>
+
+      <section class="service-teaser" aria-labelledby="service-teaser-title">
+        <div>
+          <p class="eyebrow">отдельное направление</p>
+          <h2 id="service-teaser-title">Также делаю песни на заказ</h2>
+          <p>Персональная песня по вашей истории: свадьба, юбилей, годовщина, подарок близкому человеку.</p>
+        </div>
+        <div class="service-teaser__card">
+          <strong>2500 ₽</strong>
+          <span>текст, согласование и две готовые версии песни</span>
+          <a class="button button--warm" href="songs.html">Подробнее</a>
         </div>
       </section>
     </main>
+
+    <nav class="mobile-nav" aria-label="Мобильное меню">
+      <a href="index.html" aria-current="page">Главная</a>
+      <a href="songs.html">Песня на заказ</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
 
     <script src="script.js"></script>
   </body>
