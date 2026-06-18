@@ -760,6 +760,110 @@ h3 {
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 
+.social-link {
+  position: relative;
+  isolation: isolate;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 66px;
+  overflow: hidden;
+  padding: 11px 14px 11px 60px;
+}
+
+.social-link::before {
+  content: attr(data-icon);
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--social, var(--blue));
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--social, var(--blue)) 32%, transparent);
+  font-size: 11px;
+  font-weight: 950;
+  line-height: 1;
+  transform: translateY(-50%);
+}
+
+.social-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--social, var(--blue)) 18%, transparent), transparent 56%);
+  opacity: 0.72;
+}
+
+.social-link span,
+.social-link small {
+  max-width: 100%;
+}
+
+.social-link span {
+  line-height: 1.16;
+}
+
+.social-link small {
+  margin-top: 4px;
+  color: #9fb0c6;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.contacts-panel--warm .social-link small {
+  color: #8a6871;
+}
+
+.social-link--vk {
+  --social: #4c75a3;
+}
+
+.social-link--youtube {
+  --social: #ff0033;
+}
+
+.social-link--bandlink {
+  --social: #7f5cff;
+}
+
+.social-link--telegram {
+  --social: #27a7e7;
+}
+
+.social-link--tiktok {
+  --social: #111827;
+}
+
+.social-link--rutube {
+  --social: #101010;
+}
+
+.social-link--max {
+  --social: #1b8cff;
+}
+
+.social-link--avito {
+  --social: #00aaff;
+}
+
+.social-link--whatsapp {
+  --social: #22c55e;
+}
+
+.social-link--phone {
+  --social: #f05b7f;
+}
+
+.social-link--mail {
+  --social: #a61f55;
+}
+
 .contacts-panel--warm .link-list a {
   border-color: rgba(232, 71, 127, 0.18);
 }
