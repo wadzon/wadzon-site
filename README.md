@@ -21,6 +21,7 @@
 - `assets/ne-delay-potishe.mp3` — MP3 главного трека.
 - `assets/wadzon-333-cover.jpg` — обложка 333.
 - `assets/wadzon-333-preview.mp3` — MP3 333.
+- BandLink 333: https://band.link/T2BNU
 - `assets/songs-order-banner-desktop.png` — баннер страницы песни на заказ.
 - `assets/songs-order-banner-mobile.png` — мобильный баннер страницы песни на заказ.
 

@@ -518,6 +518,17 @@ h3 {
   align-items: center;
 }
 
+.mini-release__actions {
+  display: grid;
+  gap: 10px;
+}
+
+.mini-release__link {
+  min-height: 40px;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
 .mini-release img {
   aspect-ratio: 1;
   border-radius: var(--radius);
