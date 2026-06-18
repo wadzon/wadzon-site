@@ -296,24 +296,44 @@ h3 {
 }
 
 .hero-line {
-  margin: 28px 0 0;
+  margin: 22px 0 0;
   color: #eaf5ff;
-  font-size: clamp(24px, 4vw, 48px);
-  line-height: 1;
+  font-size: clamp(22px, 3.2vw, 38px);
+  line-height: 1.08;
   font-weight: 900;
 }
 
 .hero-tagline {
-  margin: 12px 0 0;
+  margin: 8px 0 0;
   color: var(--muted);
   font-size: clamp(18px, 2vw, 24px);
   font-weight: 700;
 }
 
+.hero-intro,
+.hero-service {
+  max-width: 680px;
+  color: #cfdded;
+  font-size: clamp(17px, 1.7vw, 22px);
+  line-height: 1.45;
+  font-weight: 650;
+}
+
+.hero-intro {
+  margin: 24px 0 0;
+}
+
+.hero-service {
+  margin: 18px 0 0;
+  color: #b9c8da;
+  font-size: clamp(16px, 1.35vw, 19px);
+  font-weight: 600;
+}
+
 .hero-actions {
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 30px;
+  margin-top: 26px;
 }
 
 .button {
@@ -818,8 +838,8 @@ h3 {
 
   .artist-hero__media {
     min-height: 0;
-    height: 260px;
-    max-height: 44vh;
+    height: 230px;
+    max-height: 38vh;
     background: linear-gradient(180deg, rgba(12, 28, 46, 0.96), rgba(15, 34, 55, 0.92));
   }
 
@@ -846,7 +866,36 @@ h3 {
   }
 
   h1 {
-    font-size: clamp(44px, 15vw, 64px);
+    font-size: clamp(42px, 14vw, 58px);
+  }
+
+  .hero-intro {
+    margin-top: 16px;
+    font-size: 15px;
+  }
+
+  .hero-line {
+    margin-top: 16px;
+    font-size: clamp(21px, 6vw, 24px);
+    line-height: 1.14;
+  }
+
+  .hero-tagline {
+    font-size: 16px;
+  }
+
+  .hero-service {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.42;
+  }
+
+  .hero-actions {
+    margin-top: 20px;
+  }
+
+  .button {
+    min-height: 46px;
   }
 
   .theme-service h1,
@@ -970,10 +1019,6 @@ h3 {
 
   h2 {
     font-size: clamp(25px, 9vw, 34px);
-  }
-
-  .hero-line {
-    font-size: clamp(22px, 8vw, 32px);
   }
 
   .mobile-nav {
