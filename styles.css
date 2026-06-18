@@ -25,12 +25,16 @@
 
 html {
   min-height: 100%;
+  width: 100%;
+  max-width: 100%;
   background: var(--dark);
   overflow-x: hidden;
 }
 
 body {
   min-height: 100%;
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   color: var(--ink);
   overflow-x: hidden;
@@ -68,10 +72,12 @@ a {
 img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 audio,
 picture,
+video,
 section,
 article,
 div,
@@ -81,9 +87,20 @@ main {
   min-width: 0;
 }
 
+audio,
+picture,
+video {
+  max-width: 100%;
+}
+
+audio {
+  width: 100%;
+}
+
 main,
 .topbar {
   width: min(1160px, calc(100% - 32px));
+  max-width: 1160px;
   margin: 0 auto;
 }
 
@@ -200,11 +217,13 @@ main {
 .artist-hero__media {
   min-height: 420px;
   background: #02050a;
+  overflow: hidden;
 }
 
 .artist-hero__media img {
   width: 100%;
   height: 100%;
+  max-width: 100%;
   object-fit: cover;
   object-position: center;
 }
@@ -293,6 +312,7 @@ h3 {
 
 .button {
   display: inline-flex;
+  max-width: 100%;
   min-height: 48px;
   align-items: center;
   justify-content: center;
@@ -366,6 +386,7 @@ h3 {
 .mini-release img {
   width: 100%;
   height: 100%;
+  max-width: 100%;
   object-fit: cover;
 }
 
@@ -419,9 +440,11 @@ h3 {
 .audio-box,
 .mini-release audio {
   width: 100%;
+  max-width: 100%;
 }
 
 .audio-box {
+  overflow: hidden;
   margin-top: 22px;
   padding: 12px;
   border: 1px solid rgba(148, 190, 255, 0.2);
@@ -512,6 +535,7 @@ h3 {
 .service-hero__image img {
   width: 100%;
   height: 100%;
+  max-width: 100%;
   min-height: 320px;
   object-fit: cover;
   object-position: center;
@@ -706,18 +730,22 @@ h3 {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   body {
-    padding-bottom: 78px;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
   }
 
   main,
   .topbar {
-    width: min(100% - 18px, 430px);
+    width: 100%;
+    max-width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   main {
     padding-top: 10px;
+    padding-bottom: 28px;
   }
 
   .topbar {
@@ -734,6 +762,10 @@ h3 {
   .feature-track,
   .release-strip,
   .service-teaser,
+  .info-grid,
+  .example-grid,
+  .contacts-grid,
+  .cta-band,
   .examples-section,
   .contacts-hero,
   .contacts-panel,
@@ -743,7 +775,13 @@ h3 {
   }
 
   .artist-hero__media {
-    min-height: 190px;
+    min-height: 0;
+    height: 190px;
+    max-height: 34vh;
+  }
+
+  .artist-hero__content {
+    order: -1;
   }
 
   .artist-hero__content,
@@ -760,46 +798,57 @@ h3 {
   }
 
   h1 {
-    font-size: clamp(50px, 18vw, 82px);
+    font-size: clamp(46px, 16vw, 70px);
   }
 
   .theme-service h1,
   .theme-contacts h1 {
-    font-size: clamp(36px, 12vw, 56px);
+    font-size: clamp(32px, 10vw, 48px);
   }
 
   h2 {
-    font-size: clamp(28px, 10vw, 42px);
+    font-size: clamp(26px, 8.5vw, 38px);
   }
 
   .hero-actions,
   .mini-release {
     display: grid;
     grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .service-hero__copy {
+    justify-items: stretch;
   }
 
   .button {
     width: 100%;
+    min-width: 0;
+    white-space: normal;
   }
 
   .service-hero__image img {
-    min-height: 210px;
+    min-height: 0;
+    height: auto;
+    max-height: 260px;
+    object-fit: contain;
   }
 
   .mobile-nav {
     position: fixed;
-    left: 9px;
-    right: 9px;
-    bottom: 10px;
-    z-index: 20;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 6px;
-    padding: 7px;
-    border: 1px solid rgba(148, 190, 255, 0.2);
-    border-radius: 999px;
-    background: rgba(3, 7, 13, 0.9);
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.36);
+    gap: 0;
+    height: calc(64px + env(safe-area-inset-bottom));
+    padding: 7px 8px calc(7px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(148, 190, 255, 0.22);
+    border-radius: 0;
+    background: rgba(3, 7, 13, 0.96);
+    box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.34);
     backdrop-filter: blur(16px);
   }
 
@@ -809,15 +858,19 @@ h3 {
   }
 
   .mobile-nav a {
-    min-height: 42px;
+    min-width: 0;
+    min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 6px;
+    padding: 0 4px;
     color: #d8e7f8;
     text-align: center;
-    font-size: 12px;
-    line-height: 1.05;
+    font-size: 13px;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     overflow-wrap: normal;
   }
 
@@ -839,7 +892,10 @@ h3 {
 @media (max-width: 380px) {
   main,
   .topbar {
-    width: min(100% - 14px, 360px);
+    width: 100%;
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .artist-hero__content,
@@ -873,15 +929,13 @@ h3 {
   }
 
   .mobile-nav {
-    left: 6px;
-    right: 6px;
     gap: 4px;
-    padding: 5px;
+    padding-left: 6px;
+    padding-right: 6px;
   }
 
   .mobile-nav a {
-    min-height: 40px;
     padding: 0 4px;
-    font-size: 11px;
+    font-size: 12px;
   }
 }
