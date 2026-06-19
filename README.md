@@ -8,7 +8,8 @@
 - `songs.html` — песня на заказ, цена, процесс и примеры.
 - `contacts.html` — площадки WADZON и личные контакты для заказа.
 - `styles.css` — общие стили сайта.
-- `script.js` — цели Яндекс Метрики и поведение временных ссылок.
+- `script.js` — цели Яндекс Метрики, поведение ссылок и рендер каталога примеров.
+- `examples-data.js` — данные раскрывающегося каталога MP3-примеров.
 - `assets/` — изображения и MP3.
 
 ## Текущие ассеты
@@ -22,6 +23,7 @@
 - `assets/wadzon-333-cover.jpg` — обложка 333.
 - `assets/wadzon-333-preview.mp3` — MP3 333.
 - BandLink 333: https://band.link/T2BNU
+- `assets/examples/` — демо-MP3 для раздела примеров песен на заказ.
 - `assets/songs-order-banner-desktop.png` — баннер страницы песни на заказ.
 - `assets/songs-order-banner-mobile.png` — мобильный баннер страницы песни на заказ.
 
