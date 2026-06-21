@@ -496,6 +496,10 @@ h3 {
   background: rgba(255, 255, 255, 0.045);
 }
 
+.track-actions {
+  margin-top: 16px;
+}
+
 .audio-box audio,
 .mini-release audio {
   display: block;

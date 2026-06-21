@@ -17,10 +17,10 @@
 - `assets/wadzon-banner.jpg` — главный визуал WADZON.
 - `assets/wadzon-hero-photo.png` — фото Вадзона для главной.
 - `assets/wadzon-avatar.png` — аватар / иконка.
-- `assets/ne-delay-potishe-cover.jpg` — обложка главного трека.
-- `assets/ne-delay-potishe-vk-ad.png` — рекламный визуал главного трека.
-- `assets/ne-delay-potishe.mp3` — MP3 главного трека.
-- `assets/wadzon-333-cover.jpg` — обложка 333.
+- `assets/ne-delay-potishe-cover.jpg` — обложка предыдущего трека.
+- `assets/ne-delay-potishe-vk-ad.png` — рекламный визуал трека `Не делай потише`.
+- `assets/ne-delay-potishe.mp3` — MP3 трека `Не делай потише`.
+- `assets/wadzon-333-cover.jpg` — обложка последнего релиза 333.
 - `assets/wadzon-333-preview.mp3` — MP3 333.
 - BandLink 333: https://band.link/T2BNU
 - `assets/examples/` — демо-MP3 для раздела примеров песен на заказ.
