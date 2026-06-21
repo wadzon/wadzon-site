@@ -314,6 +314,7 @@ h3 {
 }
 
 .hero-intro,
+.hero-about,
 .hero-service {
   max-width: 680px;
   color: #cfdded;
@@ -328,6 +329,13 @@ h3 {
 
 .hero-intro--second {
   margin-top: 4px;
+}
+
+.hero-about {
+  margin: 12px 0 0;
+  color: #b9c8da;
+  font-size: clamp(15px, 1.22vw, 17px);
+  font-weight: 600;
 }
 
 .hero-service {
@@ -500,6 +508,13 @@ h3 {
   margin-top: 16px;
 }
 
+.track-slogan {
+  color: var(--text);
+  font-size: clamp(22px, 3vw, 34px);
+  line-height: 1.08;
+  font-weight: 900;
+}
+
 .audio-box audio,
 .mini-release audio {
   display: block;
@@ -516,6 +531,10 @@ h3 {
   gap: 22px;
   align-items: center;
   padding: clamp(18px, 4vw, 30px);
+}
+
+.release-strip {
+  grid-template-columns: minmax(320px, 0.98fr) minmax(0, 1fr);
 }
 
 .mini-release {
@@ -1115,6 +1134,12 @@ h3 {
 
   .hero-intro--second {
     margin-top: 3px;
+  }
+
+  .hero-about {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.42;
   }
 
   .hero-line {
