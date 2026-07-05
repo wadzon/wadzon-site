@@ -433,6 +433,10 @@ h3 {
   aspect-ratio: 16 / 9;
 }
 
+.track-visual--square {
+  aspect-ratio: 1;
+}
+
 .track-cover img,
 .track-visual img,
 .mini-release img {
@@ -440,6 +444,10 @@ h3 {
   height: 100%;
   max-width: 100%;
   object-fit: cover;
+}
+
+.track-visual--square img {
+  object-fit: contain;
 }
 
 .track-copy p,
