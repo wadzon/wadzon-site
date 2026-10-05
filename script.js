@@ -1,6 +1,6 @@
 const metrikaId = 109692355;
 
-if (typeof window.ym !== "function") {
+if (!["localhost", "127.0.0.1"].includes(location.hostname) && typeof window.ym !== "function") {
   window.ym = function () {
     (window.ym.a = window.ym.a || []).push(arguments);
   };
@@ -99,7 +99,7 @@ if (examplesCatalog && Array.isArray(window.WADZON_EXAMPLES_CATALOG)) {
       audio.setAttribute("aria-label", example.title);
 
       const action = createElement("a", "example-order-button", "Хочу похожую песню");
-      action.href = "contacts.html#order";
+      action.href = "/#order";
       action.dataset.metrikaGoal = "example_order_click";
       action.addEventListener("click", () => {
         reachMetrikaGoals(action.dataset.metrikaGoal);
