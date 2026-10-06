@@ -63,7 +63,7 @@ function hydrateExampleAudio(scope) {
   });
 }
 
-if (examplesCatalog && Array.isArray(window.WADZON_EXAMPLES_CATALOG)) {
+if (examplesCatalog && examplesCatalog.childElementCount === 0 && Array.isArray(window.WADZON_EXAMPLES_CATALOG)) {
   const root = examplesCatalog.dataset.examplesRoot || "assets/examples/";
 
   window.WADZON_EXAMPLES_CATALOG.forEach((category, index) => {
