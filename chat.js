@@ -23,6 +23,23 @@
     set(key,value) {try{sessionStorage.setItem(key,value);}catch{}},
     remove(key) {try{sessionStorage.removeItem(key);}catch{}},
   };
+  // First landing in this tab; no complete URLs, query strings or visitor IDs.
+  const acquisitionKey='wadzon-acquisition-v1';
+  let attribution={};
+  try {attribution=JSON.parse(storage.get(acquisitionKey)) || {};} catch {}
+  if(!attribution || typeof attribution!=='object' || Array.isArray(attribution))attribution={};
+  if(!Object.keys(attribution).length) {
+    const query=new URLSearchParams(location.search);
+    attribution={landing:location.pathname,referrer:'direct'};
+    for(const key of ['utm_source','utm_medium','utm_campaign','utm_content']) {
+      const value=query.get(key);if(value && /^[A-Za-z0-9_.-]{1,80}$/.test(value))attribution[key]=value;
+    }
+    try {if(document.referrer) {
+      const host=new URL(document.referrer).hostname;
+      if(host!==location.hostname)attribution.referrer=/(^|\.)vk\.(com|ru)$/.test(host)?'vk':/(^|\.)yandex\.(ru|com)$/.test(host)?'yandex':/(^|\.)google\.[a-z.]+$/.test(host)?'google':host==='t.me'?'telegram':'other';
+    }} catch {}
+    storage.set(acquisitionKey,JSON.stringify(attribution));
+  }
   input.value = storage.get(draftKey) || '';
   let pending = null;
   try {pending = JSON.parse(storage.get(pendingKey));} catch {}
@@ -156,7 +173,7 @@
   }
   form.addEventListener('submit',event=>{
     event.preventDefault();if(send.disabled)return;
-    pending={request_id:crypto.randomUUID(),text:input.value};
+    pending={request_id:crypto.randomUUID(),text:input.value,attribution};
     storage.set(pendingKey,JSON.stringify(pending));sendPending();
   });
   retry.addEventListener('click',async()=>{await refresh();if(pending && state && !state.busy && !state.attention)await sendPending();});
