@@ -90,7 +90,7 @@
     }
     empty.hidden = value.messages.length > 0;
     if (added.length) {if(bottom) scrollLatest();else latest.hidden=false;}
-    dialog.querySelector('.chat-price').textContent = value.price + ' · два варианта';
+    dialog.querySelector('.chat-price').textContent = value.price;
     const stage = value.production?.stage;
     for(const [name,condition] of [['chat_brief_confirmed',!!stage],['chat_songs_ready',stage==='READY']]) {
       const key='wadzon-goal:'+value.goal_key+':'+name;
@@ -98,21 +98,21 @@
       if(condition && !sent && !reported.has(key)) {reported.add(key);goal(name);try{localStorage.setItem(key,'1');}catch{}}
     }
     const progress = {
-      PAIR_QUEUED:'Пожелания с вашей страницы приняты.',PAIR_SCOPE_RUNNING:'Уточняем пожелания к вашей песне…',
-      PAIR_MUSIC:'Создаём новую пару вариантов…',PAIR_PREPARING:'Готовим новые варианты…',PAIR_WAIT:'Новые варианты создаются. Можно вернуться позже.',
-      PAIR_WAIT_PAYMENT:'Пожелания сохранены. Оплата следующей пары — на личной странице песни.',
-      PAIR_PUBLISH:'Новые варианты готовы. Добавляем их на вашу страницу…',PAIR_PUBLISHING:'Добавляем новые варианты…',PAIR_FINISH:'Обновляем вашу страницу…',PAIR_FINISHING:'Новые варианты готовы…',
-      AUTHOR_QUEUED:'Задание принято. Готовим текст песни…',AUTHOR_RUNNING:'Готовим текст песни…',
-      REVISION_QUEUED:'Пожелания приняты. Готовим новую версию текста…',REVISION_RUNNING:'Вносим согласованные правки…',
-      MUSIC_QUEUED:'Текст согласован. Создаём два варианта песни…',MUSIC_RUNNING:'Создаём два варианта песни…',
-      MUSIC_WAIT:'Песня создаётся. Можно закрыть окно и вернуться позже.',
-      DELIVERY_QUEUED:'Песни готовы. Собираем страницу прослушивания…',DELIVERY_RUNNING:'Готовим страницу прослушивания…',
-      TEXT_SENT:'Текст готов. Прочитайте его и напишите, что думаете.',TEXT_COLLECTION:'Собираем ваши пожелания к тексту.',
-      READY:'Песни готовы — ссылка в разговоре.',PAYMENT_HOLD:'Вопрос оплаты сохранён. Ожидается проверка.'
+      PAIR_QUEUED:'Готовим новые версии…',PAIR_SCOPE_RUNNING:'Уточняем пожелания…',
+      PAIR_MUSIC:'Создаём новые версии…',PAIR_PREPARING:'Готовим новые версии…',PAIR_WAIT:'Создаём новые версии…',
+      PAIR_WAIT_PAYMENT:'Оплата новых версий — на странице песни.',
+      PAIR_PUBLISH:'Готовим ваши песни…',PAIR_PUBLISHING:'Готовим ваши песни…',PAIR_FINISH:'Готовим ваши песни…',PAIR_FINISHING:'Новые версии готовы.',
+      AUTHOR_QUEUED:'Пишем текст песни…',AUTHOR_RUNNING:'Пишем текст песни…',
+      REVISION_QUEUED:'Меняем текст…',REVISION_RUNNING:'Меняем текст…',
+      MUSIC_QUEUED:'Создаём ваши песни…',MUSIC_RUNNING:'Создаём ваши песни…',
+      MUSIC_WAIT:'Создаём ваши песни…',
+      DELIVERY_QUEUED:'Готовим ваши песни…',DELIVERY_RUNNING:'Готовим ваши песни…',
+      TEXT_SENT:'Текст готов.',TEXT_COLLECTION:'Ждём ваших пожеланий к тексту.',
+      READY:'Песни готовы.',PAYMENT_HOLD:'Нужна помощь с оплатой.'
     };
-    status.textContent = value.automation_paused ? 'Подготовка заказов временно приостановлена. Переписка сохранена.' : value.attention ? 'Сообщение сохранено. Ответ пока не удалось подготовить.'
-      : progress[stage] || (value.busy ? 'Готовим ответ… Можно закрыть окно — разговор сохранится.'
-      : value.phase === 'confirmed' ? 'Задание согласовано и сохранено.' : 'Разговор сохраняется автоматически');
+    status.textContent = value.automation_paused ? 'Сейчас не можем подготовить песню.' : value.attention ? ''
+      : progress[stage] || (value.busy ? 'Пишем ответ…' : '');
+    status.hidden = !status.textContent;
     dialog.querySelector('.chat-production-note').hidden = value.production_connected || value.phase !== 'confirmed';
     controls();
   }
@@ -145,10 +145,10 @@
         if(input.value === pending.text) {input.value='';storage.remove(draftKey);}
         pending=null;storage.remove(pendingKey);
       }
-      showError(state.attention ? 'Сообщение сохранено. Подготовить ответ пока не удалось.' : '');
+      showError(state.attention ? 'Не удалось подготовить ответ. Попробуйте ещё раз.' : '');
       controls();schedule();
     } catch {
-      showError('Не удалось обновить разговор. Текст сохранён в этом окне. Проверьте соединение и нажмите «Проверить разговор».');
+      showError('Не удалось обновить разговор. Попробуйте ещё раз.');
       clearTimeout(timer);if(dialog.open)timer=setTimeout(refresh,Math.min(30000,5000*2**networkFailures++));
     }
   }
@@ -184,7 +184,7 @@
       pending=null;storage.remove(pendingKey);
       await receipt();scrollLatest();schedule();
     } catch(error) {
-      showError(error.code==='request_conflict' ? 'Этот запрос уже сохранён с другим текстом. Требуется проверка разговора.' : 'Не удалось подтвердить отправку. Нажмите «Проверить разговор»: сохранённое сообщение не будет отправлено дважды.');
+      showError(error.code==='request_conflict' ? 'Не удалось отправить сообщение. Попробуйте ещё раз.' : 'Не удалось подтвердить отправку. Попробуйте ещё раз.');
     } finally {busy=false;controls();}
   }
   form.addEventListener('submit',async event=>{
