@@ -23,7 +23,7 @@
     set(key,value) {try{sessionStorage.setItem(key,value);}catch{}},
     remove(key) {try{sessionStorage.removeItem(key);}catch{}},
   };
-  // First landing in this tab; no complete URLs, query strings or visitor IDs.
+  // First landing in this tab; only named campaign fields and bounded IDs.
   const acquisitionKey='wadzon-acquisition-v1';
   let attribution={};
   try {attribution=JSON.parse(storage.get(acquisitionKey)) || {};} catch {}
@@ -34,11 +34,27 @@
     for(const key of ['utm_source','utm_medium','utm_campaign','utm_content']) {
       const value=query.get(key);if(value && /^[A-Za-z0-9_.-]{1,80}$/.test(value))attribution[key]=value;
     }
+    const click=query.get('yclid');
+    if(click && /^[0-9]{1,40}$/.test(click))attribution.yclid=click;
     try {if(document.referrer) {
       const host=new URL(document.referrer).hostname;
       if(host!==location.hostname)attribution.referrer=/(^|\.)vk\.(com|ru)$/.test(host)?'vk':/(^|\.)yandex\.(ru|com)$/.test(host)?'yandex':/(^|\.)google\.[a-z.]+$/.test(host)?'google':host==='t.me'?'telegram':'other';
     }} catch {}
     storage.set(acquisitionKey,JSON.stringify(attribution));
+  }
+  async function identifyVisit() {
+    // A blocked counter must never block a customer's message or invent an ID.
+    // Only the first real message freezes this optional metadata on the server.
+    if(/^[0-9]{1,32}$/.test(attribution.client_id || '') || typeof ym!=='function')return;
+    await new Promise(resolve=>{
+      const timeout=setTimeout(resolve,400);
+      try {ym(109692355,'getClientID',value=>{
+        if(typeof value==='string' && /^[0-9]{1,32}$/.test(value)) {
+          attribution.client_id=value;storage.set(acquisitionKey,JSON.stringify(attribution));
+        }
+        clearTimeout(timeout);resolve();
+      });} catch {clearTimeout(timeout);resolve();}
+    });
   }
   input.value = storage.get(draftKey) || '';
   let pending = null;
@@ -171,9 +187,12 @@
       showError(error.code==='request_conflict' ? 'Этот запрос уже сохранён с другим текстом. Требуется проверка разговора.' : 'Не удалось подтвердить отправку. Нажмите «Проверить разговор»: сохранённое сообщение не будет отправлено дважды.');
     } finally {busy=false;controls();}
   }
-  form.addEventListener('submit',event=>{
+  form.addEventListener('submit',async event=>{
     event.preventDefault();if(send.disabled)return;
-    pending={request_id:crypto.randomUUID(),text:input.value,attribution};
+    const text=input.value;
+    // Lock before awaiting the counter so a double submit cannot create two jobs.
+    busy=true;controls();await identifyVisit();
+    pending={request_id:crypto.randomUUID(),text,attribution:{...attribution}};
     storage.set(pendingKey,JSON.stringify(pending));sendPending();
   });
   retry.addEventListener('click',async()=>{await refresh();if(pending && state && !state.busy && !state.attention)await sendPending();});
