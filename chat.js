@@ -68,6 +68,28 @@
     input.disabled = !!state?.attention || !!state?.production?.payment_hold;
     send.disabled = !state || blocked || !input.value.trim();
   }
+  const lyricViews=new Map();
+  function showLyrics(item,message,text) {
+    if(!Array.isArray(message.lyric_pages) || !message.lyric_pages.length || lyricViews.has(message.id))return;
+    const paths=message.lyric_pages;
+    if(paths.length>12 || !paths.every(path=>typeof path==='string' && /^\/api\/chat\/lyrics\/web_out_[a-f0-9]{32}\/[1-9][0-9]?\.png$/.test(path)))return;
+    lyricViews.set(message.id,true);
+    const pages=document.createElement('div');pages.className='chat-lyric-pages';
+    const details=document.createElement('details'),summary=document.createElement('summary');
+    summary.textContent='Текст для копирования';details.append(summary);
+    const fallback=document.createElement('p');fallback.textContent=message.text;details.append(fallback);
+    Promise.all(paths.map(async(path,index)=>{
+      const endpoint=api ? api+path.replace('/api/chat','') : path;
+      const response=await fetch(endpoint,{cache:'no-store',credentials:'include'});
+      if(!response.ok || !response.headers.get('content-type')?.startsWith('image/png'))throw new Error('lyric_image');
+      const blob=await response.blob(),url=URL.createObjectURL(blob);
+      const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noopener';link.className='chat-lyric-page';
+      const image=document.createElement('img');image.src=url;image.alt='Текст вашей песни — страница '+(index+1);image.decoding='async';
+      link.append(image);return link;
+    })).then(links=>{
+      pages.append(...links);text.hidden=true;item.append(pages,details);
+    }).catch(()=>{lyricViews.delete(message.id);}); // Readable text remains available on a failed image fetch.
+  }
   function render(value) {
     state = value;
     const bottom = nearBottom();
@@ -79,6 +101,8 @@
       who.textContent = message.direction === 'in' ? 'Вы' : 'Помощник Вадима';
       const text = document.createElement('p'); text.textContent = message.text;
       item.append(who,text);
+      item.dataset.messageId=message.id;
+      showLyrics(item,message,text);
       if(message.href) {
         const url = new URL(message.href,location.origin);
         if([location.origin,'https://orders.wadzon.com'].includes(url.origin) && /^\/o\/[A-Za-z0-9_-]{43}$/.test(url.pathname)) {
@@ -87,6 +111,11 @@
         }
       }
       log.append(item); lastSeq = message.seq;
+    }
+    // An existing saved lyric can receive its image presentation after deployment.
+    for(const message of value.messages)if(message.lyric_pages && !lyricViews.has(message.id)) {
+      const item=[...log.children].find(node=>node.dataset.messageId===message.id);
+      if(item)showLyrics(item,message,item.querySelector('p'));
     }
     empty.hidden = value.messages.length > 0;
     if (added.length) {if(bottom) scrollLatest();else latest.hidden=false;}
@@ -111,7 +140,7 @@
       READY:'Песни готовы.',PAYMENT_HOLD:'Нужна помощь с оплатой.'
     };
     status.textContent = value.automation_paused ? 'Сейчас не можем подготовить песню.' : value.attention ? ''
-      : progress[stage] || (value.busy ? 'Пишем ответ…' : '');
+      : progress[stage] || (value.collecting ? 'Можно дописать историю — я подожду.' : value.busy ? 'Пишем ответ…' : '');
     status.hidden = !status.textContent;
     dialog.querySelector('.chat-production-note').hidden = value.production_connected || value.phase !== 'confirmed';
     controls();
@@ -134,7 +163,7 @@
   }
   function schedule() {
     clearTimeout(timer);
-    if(dialog.open) timer=setTimeout(refresh,state?.busy ? 1500 : 5000);
+    if(dialog.open) timer=setTimeout(refresh,state?.busy || state?.collecting ? 1500 : 5000);
   }
   async function refresh() {
     try {
@@ -173,7 +202,8 @@
   log.addEventListener('scroll',()=>{if(nearBottom())latest.hidden=true;});
   latest.addEventListener('click',scrollLatest);
   input.addEventListener('input',()=>{storage.set(draftKey,input.value);controls();});
-  input.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();if(!send.disabled)form.requestSubmit();}});
+  // A customer's Enter (including the mobile return key) always inserts a line.
+  // Only the explicit Send button submits this form.
   async function sendPending() {
     busy=true;controls();showError('');
     try {

@@ -19,3 +19,13 @@
 .warm-site .chat-compose textarea{border-color:#b69b89}.warm-site .chat-compose button{background:#762837;border-color:#762837}
 .warm-site .chat-compose button:disabled{background:#e8ded3;border-color:#d7c6b6;color:#7b6d66}
 .chat-is-open .mobile-order{display:none!important}
+.warm-site .chat-message p{font:18px/1.7 Arial,sans-serif;color:#172b3a;letter-spacing:0}
+.warm-site .chat-message{padding:16px 19px;background:#fff;border-color:#d9c9b7;max-width:96%}
+.warm-site .chat-message.from-client{background:#f3ddcf}.warm-site .chat-who{font-size:13px;color:#68333b}
+.warm-site .chat-compose textarea{font-size:18px;min-height:84px;line-height:1.5}
+.warm-site .chat-lyric-pages{display:grid;gap:16px;margin-top:12px}
+.warm-site .chat-lyric-page{display:block;border:1px solid #d9c9b7;border-radius:9px;overflow:hidden;background:#fff}
+.warm-site .chat-lyric-page img{display:block;width:100%;height:auto}
+.warm-site .chat-message details{margin-top:14px;font:15px/1.5 Arial,sans-serif}
+.warm-site .chat-message summary{cursor:pointer;color:#71353e;padding:8px 0}
+.warm-site .chat-message [hidden]{display:none}
