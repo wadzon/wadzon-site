@@ -14,6 +14,7 @@
   const retry = dialog.querySelector('.chat-retry');
   const latest = dialog.querySelector('.chat-latest');
   const empty = dialog.querySelector('.chat-empty');
+  let voice=null;
   let state = null, timer = null, busy = false, opener = null, lastSeq = 0, acked = 0;
   let networkFailures=0;
   const draftKey = 'wadzon-website-chat-draft-v1';
@@ -64,11 +65,27 @@
   function scrollLatest() {log.scrollTop = log.scrollHeight; latest.hidden = true;}
   function showError(message) {errorBox.textContent = message; errorBox.hidden = !message; retry.hidden = !message;}
   function controls() {
-    const blocked = busy || state?.busy || state?.attention || state?.automation_paused || state?.production?.payment_hold || !!pending;
+    const blocked = busy || state?.busy || state?.attention || state?.automation_paused || state?.production?.payment_hold || !!pending || voice?.blocksText();
     input.disabled = !!state?.attention || !!state?.production?.payment_hold;
     send.disabled = !state || blocked || !input.value.trim();
   }
   const lyricViews=new Map();
+  const audioViews=new Set();
+  function showVoice(item,message,text) {
+    const path=message.voice?.path;
+    if(typeof path!=='string' || !/^\/api\/chat\/voice\/[A-Za-z0-9_-]{8,90}$/.test(path) || audioViews.has(message.id))return;
+    audioViews.add(message.id);
+    const endpoint=api?api+path.replace('/api/chat',''):path;
+    fetch(endpoint,{cache:'no-store',credentials:'include'}).then(response=>{
+      if(!response.ok || !response.headers.get('content-type')?.startsWith('audio/'))throw new Error('voice');
+      return response.blob();
+    }).then(blob=>{
+      const player=document.createElement('audio');player.controls=true;player.src=URL.createObjectURL(blob);player.setAttribute('aria-label','Ваше голосовое сообщение');
+      const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Расшифровка';details.append(summary);
+      const transcript=document.createElement('p');transcript.textContent=message.text;details.append(transcript);
+      text.hidden=true;item.append(player,details);
+    }).catch(()=>{audioViews.delete(message.id);});
+  }
   function showLyrics(item,message,text) {
     if(!Array.isArray(message.lyric_pages) || !message.lyric_pages.length || lyricViews.has(message.id))return;
     const paths=message.lyric_pages;
@@ -103,6 +120,7 @@
       item.append(who,text);
       item.dataset.messageId=message.id;
       showLyrics(item,message,text);
+      showVoice(item,message,text);
       if(message.href) {
         const url = new URL(message.href,location.origin);
         if([location.origin,'https://orders.wadzon.com'].includes(url.origin) && /^\/o\/[A-Za-z0-9_-]{43}$/.test(url.pathname)) {
@@ -140,10 +158,10 @@
       READY:'Песни готовы.',PAYMENT_HOLD:'Нужна помощь с оплатой.'
     };
     status.textContent = value.automation_paused ? 'Сейчас не можем подготовить песню.' : value.attention ? ''
-      : progress[stage] || (value.collecting ? 'Можно дописать историю — я подожду.' : value.busy ? 'Пишем ответ…' : '');
+      : value.voice?.busy ? 'Расшифровываем ваше голосовое сообщение…' : progress[stage] || (value.collecting ? 'Можно дописать историю — я подожду.' : value.busy ? 'Пишем ответ…' : '');
     status.hidden = !status.textContent;
     dialog.querySelector('.chat-production-note').hidden = value.production_connected || value.phase !== 'confirmed';
-    controls();
+    voice?.reconcile(value);voice?.update(value);controls();
   }
   async function request(url, body) {
     const endpoint=api ? api+url.replace('/api/chat','') : url;
@@ -229,4 +247,15 @@
     storage.set(pendingKey,JSON.stringify(pending));sendPending();
   });
   retry.addEventListener('click',async()=>{await refresh();if(pending && state && !state.busy && !state.attention)await sendPending();});
+  const voiceRoot=dialog.querySelector('.chat-voice');
+  if(voiceRoot && window.WadzonVoice)voice=window.WadzonVoice(voiceRoot,{
+    changed:controls,error:showError,
+    async send(payload){
+      await receipt();await identifyVisit();
+      render(await request('/api/chat/voice',{...payload,attribution:{...attribution}}));
+      const key='voice-goal:'+payload.request_id;
+      if(!storage.get(key)){goal('chat_message_sent');storage.set(key,'1');}
+      scrollLatest();schedule();
+    }
+  });
 })();
