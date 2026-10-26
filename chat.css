@@ -29,3 +29,9 @@
 .warm-site .chat-message details{margin-top:14px;font:15px/1.5 Arial,sans-serif}
 .warm-site .chat-message summary{cursor:pointer;color:#71353e;padding:8px 0}
 .warm-site .chat-message [hidden]{display:none}
+.warm-site .chat-payment-note{display:block;margin-top:5px;font:13px/1.45 Arial,sans-serif;color:#33546a;max-width:390px}
+.warm-site .chat-dialog .chat-empty{padding:0;color:#172b3a}
+.warm-site .chat-empty .chat-starter-part{white-space:pre-line;font:17px/1.55 Arial,sans-serif;color:#172b3a;margin:0 0 16px;max-width:none}
+.warm-site .chat-empty .chat-starter-part:last-child{margin-bottom:0}
+.warm-site .chat-log:focus{outline:none}
+@media(max-width:640px){.warm-site .chat-header{gap:12px;padding:13px 16px}.warm-site .chat-header h2{font-size:19px}.warm-site .chat-empty .chat-starter-part{font-size:16px;line-height:1.5;margin-bottom:13px}.warm-site .chat-dialog .chat-log{padding:16px}.warm-site .chat-payment-note{font-size:12px}.warm-site .chat-compose textarea{font-size:16px;min-height:60px}.mobile-order small{display:block;text-align:center;color:#fff3de;font:12px/1.4 Arial,sans-serif;margin-top:7px}body.warm-site{padding-bottom:110px}}

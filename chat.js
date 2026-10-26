@@ -189,7 +189,10 @@
       input.value='Мне нравится пример «'+button.dataset.exampleTitle+'». ';
       storage.set(draftKey,input.value);
     }
-    input.focus();await refresh();
+    // Let a new visitor read the standard questions before opening a phone keyboard.
+    if(input.value.trim() || state?.messages?.length)input.focus();
+    else log.focus({preventScroll:true});
+    await refresh();
   }
   document.addEventListener('click', event => {
     const button = event.target.closest('[data-open-chat]');
