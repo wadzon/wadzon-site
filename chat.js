@@ -124,7 +124,7 @@
       if(message.href) {
         const url = new URL(message.href,location.origin);
         if([location.origin,'https://orders.wadzon.com'].includes(url.origin) && /^\/o\/[A-Za-z0-9_-]{43}$/.test(url.pathname)) {
-          const link=document.createElement('a');link.href=url.href;link.textContent='Слушать вашу песню →';
+          const link=document.createElement('a');link.href=url.href;link.textContent=message.link_label==='Внести предоплату 290 ₽ →' ? message.link_label : 'Слушать вашу песню →';
           link.className='chat-song-link ym-disable-tracklink';link.target='_blank';link.rel='noopener noreferrer';item.append(link);
         }
       }
