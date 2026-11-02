@@ -2,6 +2,13 @@
 <html lang="ru"><head><script data-chat-bootstrap>/* Must run first in <head>, before any analytics or other script. */
 (() => {
   'use strict';
+  if (location.hostname === 'wadzon.ru') {
+    const canonical = 'https://wadzon.com' + location.pathname + location.search + location.hash;
+    // The destination retains the capability; scripts on the old origin must not see it.
+    if (/^#chat=/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
+    location.replace(canonical);
+    return;
+  }
   if (!/^#chat=/.test(location.hash)) return;
   const match = /^#chat=([A-Za-z0-9_-]{43})$/.exec(location.hash);
   // Remove even a malformed recovery fragment before third-party code can see it.
