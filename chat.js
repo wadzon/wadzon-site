@@ -14,7 +14,7 @@
   const retry = dialog.querySelector('.chat-retry');
   const latest = dialog.querySelector('.chat-latest');
   const empty = dialog.querySelector('.chat-empty');
-  let voice=null;
+  let voice=null,notifications=null;
   let state = null, timer = null, busy = false, opener = null, lastSeq = 0, acked = 0;
   let networkFailures=0, refreshing=null, conversation='', seen=0, restoring=false, recoveryFailed=false;
   let draftKey='',pendingKey='';
@@ -199,7 +199,7 @@
       : value.voice?.busy ? 'Расшифровываем ваше голосовое сообщение…' : progress[stage] || (value.collecting ? 'Можно дописать историю — я подожду.' : value.busy ? 'Пишем ответ…' : '');
     status.hidden = !status.textContent;
     dialog.querySelector('.chat-production-note').hidden = value.production_connected || value.phase !== 'confirmed';
-    voice?.reconcile(value);voice?.update(value);controls();markSeen();updateNotice();
+    voice?.reconcile(value);voice?.update(value);notifications?.update(value);controls();markSeen();updateNotice();
   }
   async function request(url, body) {
     const endpoint=api ? api+url.replace('/api/chat','') : url;
@@ -347,6 +347,7 @@
       scrollLatest();schedule();
     }
   });
+  if(window.WadzonNotifications)notifications=window.WadzonNotifications(dialog,request);
   if(window.WadzonRecoveryToken || storage.get('wadzon-chat-restore-v1'))restoreOrder();
   else refresh();
 })();
