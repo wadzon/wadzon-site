@@ -1,0 +1,22 @@
+/* Auxiliary pages only. Shared header styles live in clear-hero.css. */
+.clear-aux-artist,.clear-aux-privacy{margin:0;background:#fffaf3;color:#332c26;font-family:Arial,sans-serif}
+.clear-aux-wrap{width:min(1120px,calc(100% - 40px));margin-inline:auto}
+.clear-aux-intro{padding-top:clamp(36px,6vw,76px);padding-bottom:28px}
+.clear-aux-intro h1{max-width:850px;margin:10px 0 18px;font-size:clamp(34px,5vw,60px);font-weight:750;line-height:1.08;letter-spacing:-.035em}
+.clear-aux-eyebrow{margin:0;color:#786351;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.clear-aux-lead{max-width:740px;margin:0 0 20px;font-size:clamp(18px,2.2vw,23px);line-height:1.5;color:#574a3e}
+.clear-aux-listen{display:inline-block;margin:0 0 24px;color:#573b28;font-size:18px;font-weight:700;text-underline-offset:4px}
+.clear-aux-order{max-width:850px;padding:20px 24px;border:1px solid #d9c7b5;border-radius:16px;background:#fff}
+.clear-aux-order p{margin:0 0 14px;font-size:18px;line-height:1.5}
+.clear-aux-actions{display:flex;flex-wrap:wrap;gap:12px}
+.clear-aux-button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:11px 18px;border:1px solid #523923;border-radius:10px;background:#523923;color:#fff;font-size:16px;font-weight:700;line-height:1.4;text-decoration:none}
+.clear-aux-button-secondary{background:#fff;color:#523923}
+.clear-aux-button:hover{background:#745336;color:#fff}
+.clear-aux-button:focus-visible,.clear-aux-listen:focus-visible{outline:3px solid #b47737;outline-offset:4px}
+.clear-aux-artist .artist-grid{scroll-margin-top:100px}
+.clear-aux-artist .section{padding-top:24px}
+.clear-aux-privacy #main{width:min(900px,calc(100% - 40px));max-width:900px;margin-inline:auto;padding:48px 0 64px}
+.clear-aux-privacy #main h1{margin:12px 0 20px;font-size:clamp(34px,5vw,52px);line-height:1.15;letter-spacing:-.025em}
+.clear-aux-privacy .story-choice{font-size:17px;line-height:1.7}
+.clear-aux-privacy .story-choice p{margin-block:0 20px}
+@media(max-width:600px){.clear-aux-wrap{width:calc(100% - 32px)}.clear-aux-order{padding:18px}.clear-aux-actions{flex-direction:column;align-items:stretch}.clear-aux-button{width:100%;box-sizing:border-box}.clear-aux-privacy #main{width:calc(100% - 32px);padding-top:32px}}
