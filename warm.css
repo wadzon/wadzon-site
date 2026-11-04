@@ -35,3 +35,24 @@
 
 
 @media(max-width:640px){.header-actions .max-label-verb{display:none}}
+
+/* Public orders continue in the owner's MAX or Avito. */
+.channel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.mobile-order-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+.topic-section{padding-block:72px}
+.topic-section h2{margin-bottom:30px}
+.topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.topic-card{display:block;padding:26px;border:1px solid #eadfce;border-radius:18px;text-decoration:none;background:#fffdf8;color:inherit}
+.topic-card:hover,.topic-card:focus-visible{border-color:#a87d45;background:#fff8e9}
+.topic-card h3{font-size:24px;margin:0 0 12px}
+.topic-card p{line-height:1.65;margin:0 0 18px}
+.topic-card span{font-size:14px;font-weight:600}
+.story-guide,.story-choice,.seo-story{padding-block:32px}
+.story-guide p,.story-guide li,.story-choice p,.story-choice li,.seo-story p,.seo-story li{line-height:1.75;max-width:76ch}
+.legacy-order{padding-block:70px;min-height:50vh}
+.legacy-order h1{font-size:clamp(30px,5vw,60px)}
+.legacy-order p{line-height:1.7}
+.legacy-order .button{margin-bottom:12px}
+.art-sheet,.extras>img{height:auto}
+.offer>span{display:block;margin-top:6px}
+@media(max-width:640px){.topic-section{padding-block:44px}.topic-grid,.channel-grid{grid-template-columns:1fr}.topic-card{padding:22px}.topic-card h3{font-size:22px}.mobile-order-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
