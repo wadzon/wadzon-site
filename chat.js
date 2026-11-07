@@ -108,7 +108,7 @@
   function scrollLatest() {log.scrollTop = log.scrollHeight; latest.hidden = true;}
   function showError(message) {errorBox.textContent = message; errorBox.hidden = !message; retry.hidden = !message;}
   function controls() {
-    const blocked = busy || restoring || recoveryFailed || state?.busy || state?.attention || state?.automation_paused || state?.production?.payment_hold || !!pending || voice?.blocksText();
+    const blocked = busy || restoring || recoveryFailed || (state?.busy && !state?.late_first_text) || state?.attention || state?.automation_paused || state?.production?.payment_hold || !!pending || voice?.blocksText();
     input.disabled = !!state?.attention || !!state?.production?.payment_hold;
     send.disabled = !state || blocked || !input.value.trim();
   }
