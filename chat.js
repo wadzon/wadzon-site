@@ -130,14 +130,13 @@
     }).catch(()=>{audioViews.delete(message.id);});
   }
   function showLyrics(item,message,text) {
+    if(message.lyric_presentation || message.lyric_pages?.length)
+      text.textContent=message.lyric_pages?.length ? 'Фото текста песни' : 'Готовим фото текста песни…';
     if(!Array.isArray(message.lyric_pages) || !message.lyric_pages.length || lyricViews.has(message.id))return;
     const paths=message.lyric_pages;
     if(paths.length>12 || !paths.every(path=>typeof path==='string' && /^\/api\/chat\/lyrics\/web_out_[a-f0-9]{32}\/[1-9][0-9]?\.png$/.test(path)))return;
-    lyricViews.set(message.id,true);
+    lyricViews.set(message.id,'loading');
     const pages=document.createElement('div');pages.className='chat-lyric-pages';
-    const details=document.createElement('details'),summary=document.createElement('summary');
-    summary.textContent='Текст для копирования';details.append(summary);
-    const fallback=document.createElement('p');fallback.textContent=message.text;details.append(fallback);
     Promise.all(paths.map(async(path,index)=>{
       const endpoint=api ? api+path.replace('/api/chat','') : path;
       const response=await fetch(endpoint,{cache:'no-store',credentials:'include'});
@@ -145,10 +144,13 @@
       const blob=await response.blob(),url=URL.createObjectURL(blob);
       const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noopener';link.className='chat-lyric-page';
       const image=document.createElement('img');image.src=url;image.alt='Текст вашей песни — страница '+(index+1);image.decoding='async';
+      try{await image.decode();}catch(error){URL.revokeObjectURL(url);throw error;}
       link.append(image);return link;
     })).then(links=>{
-      pages.append(...links);text.hidden=true;item.append(pages,details);
-    }).catch(()=>{lyricViews.delete(message.id);}); // Readable text remains available on a failed image fetch.
+      pages.append(...links);text.hidden=true;item.append(pages);
+      lyricViews.set(message.id,'ready');
+      markSeen();receipt().catch(()=>{});
+    }).catch(()=>{lyricViews.delete(message.id);text.textContent='Загружаем фото текста песни…';});
   }
   function render(value) {
     bindConversation(value);state = value;
@@ -217,6 +219,8 @@
   async function receipt() {
     if (dialog.open && !document.hidden && state.last_outgoing_seq<=seen && state.last_outgoing_seq > acked) {
       const seq = state.last_outgoing_seq;
+      if(state.messages.some(message=>message.seq<=seq && message.lyric_wait_for_receipt
+        && lyricViews.get(message.id)!=='ready'))return;
       await request('/api/chat/ack',{seq}); acked=seq;
     }
   }

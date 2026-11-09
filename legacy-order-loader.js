@@ -19,7 +19,7 @@
     try {
       await load('voice-recorder.js?v=20261103notify1');
       await load('customer-notifications.js?v=20261103notify1');
-      await load('chat.js?v=20261103notify1');
+      await load('chat.js?v=20261109photos1');
     } catch {
       document.getElementById('legacy-order-note').textContent = 'Не удалось загрузить прежний заказ. Сохраните личную ссылку и напишите Вадиму в MAX или на Авито.';
     }
