@@ -19,15 +19,15 @@
 .clear-price{display:flex;align-items:center;gap:18px;margin:0}
 .clear-price strong{display:block;flex-shrink:0;color:var(--clear-wine);font:700 59px/1 Arial,sans-serif;letter-spacing:-.065em;white-space:nowrap;font-variant-numeric:lining-nums tabular-nums}
 .clear-price strong>span{font-size:.69em;letter-spacing:-.02em}
-.clear-price .clear-price-note{max-width:10ch;color:#856a69;font:12px/1.4 Arial,sans-serif}
-.clear-payment{margin:18px 0 19px;color:var(--clear-ink);font:400 20px/1.36 Georgia,'Times New Roman',serif}
-.clear-actions{display:grid;grid-template-columns:1.12fr 1fr;gap:12px}
-.clear-button{min-width:0;min-height:56px;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 14px;border:1px solid transparent;border-radius:9px;font:700 14px/1.2 Arial,sans-serif;text-decoration:none;white-space:nowrap;transition:background-color .15s,box-shadow .15s}
-.clear-button--max{background:var(--clear-wine);color:#fff9ef;box-shadow:0 5px 14px #74273917}
-.clear-button--max:hover{background:#5e1e2e;box-shadow:0 5px 18px #74273926}
-.clear-button--max img{width:24px;height:24px;max-width:none;flex:0 0 24px;border-radius:7px}
-.clear-button--reviews{background:#fffdf8;color:var(--clear-wine);border-color:#cdb3a2}
-.clear-button--reviews:hover{background:#faecdd;border-color:#a47867}
+.clear-price .clear-price-note{color:#856a69;font:12px/1.4 Arial,sans-serif}
+.clear-payment{margin:14px 0;color:var(--clear-ink);font:13px/1.5 Arial,sans-serif}
+.clear-actions,.mobile-order-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.clear-button{min-width:0;min-height:49px;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 8px;border:1px solid transparent;border-radius:9px;font:700 14px/1.25 Arial,sans-serif;text-align:center;text-decoration:none;transition:background-color .15s,box-shadow .15s}
+.clear-button--primary{background:#742739;color:#fff9ef;box-shadow:0 5px 14px #74273917}
+.clear-button--primary:hover{background:#5e1e2e;box-shadow:0 5px 18px #74273926}
+.clear-button--secondary{background:#fffdf8;color:#742739;border-color:#cdb3a2}
+.clear-button--secondary:hover{background:#faecdd;border-color:#a47867}
+.order-actions{max-width:640px;margin:0 auto 22px}
 .clear-button-arrow{font-weight:400;font-size:16px}
 .clear-listen{display:inline-block;margin-top:17px;color:var(--clear-wine);font:13px/1.4 Arial,sans-serif;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#c5a38f}
 .clear-listen>span{font-size:16px;text-decoration:none;margin-right:4px}
@@ -41,7 +41,7 @@
 .clear-caption-note{display:block;margin-top:4px;font:11px/1.4 Arial,sans-serif;color:#7c6865}
 .clear-photo-note{position:absolute;top:20%;right:-21px;color:#b68769;font:60px/1 Georgia,serif;transform:rotate(12deg)}
 .clear-header a:focus-visible,.clear-hero a:focus-visible{outline:3px solid #ae7d32;outline-offset:4px}
-@media(max-width:1000px) and (min-width:641px){.clear-header,.clear-hero{width:calc(100% - 44px)}.clear-hero{gap:28px;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr)}.clear-header .clear-nav{gap:18px}.clear-header .clear-nav a:last-child{display:none}.clear-title{font-size:45px}.clear-description{font-size:13px}.clear-offer{padding-inline:16px}.clear-versions{font-size:27px}.clear-price strong{font-size:52px}.clear-actions{grid-template-columns:1fr}.clear-person .clear-photo{height:390px}.clear-photo-note{right:-10px}.clear-caption{margin-left:-9px}}
+@media(max-width:1000px) and (min-width:641px){.clear-header,.clear-hero{width:calc(100% - 44px)}.clear-hero{gap:28px;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr)}.clear-header .clear-nav{gap:18px}.clear-header .clear-nav a:last-child{display:none}.clear-title{font-size:45px}.clear-description{font-size:13px}.clear-offer{padding-inline:16px}.clear-versions{font-size:27px}.clear-price strong{font-size:52px}.clear-person .clear-photo{height:390px}.clear-photo-note{right:-10px}.clear-caption{margin-left:-9px}}
 @media(max-width:640px){
   .clear-header,.clear-hero{width:calc(100% - 36px)}
   .clear-header{height:auto;min-height:61px;padding:13px 0;gap:12px}
@@ -60,11 +60,11 @@
   .clear-timing{margin:5px 0 9px;font-size:23px;line-height:1.15}
   .clear-price{gap:17px}
   .clear-price strong{font-size:55px;line-height:1;letter-spacing:-.065em}
-  .clear-price .clear-price-note{font-size:10px;line-height:1.35;max-width:9ch}
-  .clear-payment{margin:14px 0 15px;font-size:19px;line-height:1.28}
-  .clear-actions{grid-template-columns:1.08fr 1fr;gap:8px}
-  .clear-button{min-height:53px;padding:11px 8px;gap:6px;font-size:13px;border-radius:8px}
-  .clear-button--max img{width:22px;height:22px;flex-basis:22px;border-radius:6px}
+  .clear-price .clear-price-note{font-size:11px;line-height:1.35}
+  .clear-payment{margin:12px 0;font-size:12px;line-height:1.4}
+  .clear-button{min-height:46px;padding:8px 7px;font-size:12px;border-radius:8px}
+  .mobile-order .mobile-order-actions{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+  .mobile-order-actions .clear-button{min-height:44px;padding-inline:2px;font-size:11px}
   .clear-button-arrow{display:none}
   .clear-listen{margin-top:14px;font-size:12px}
   .clear-person{display:flex;align-items:center;gap:16px;justify-self:start;width:auto;max-width:100%;padding:0;margin:0}
@@ -76,9 +76,8 @@
   .clear-caption strong{margin:3px 0 0;font-size:25px}
   .clear-caption-note{max-width:24ch;font-size:10px;line-height:1.4}
 }
-@media(max-width:374px){.clear-title{font-size:31px}.clear-versions{font-size:26px}.clear-timing{font-size:22px}.clear-offer{padding-left:14px;padding-right:12px}.clear-price strong{font-size:53px}.clear-price{gap:14px}.clear-payment{font-size:18px}.clear-description{font-size:12px}.clear-button{font-size:12px;gap:5px}.clear-listen{font-size:11px}}
-/* Keep price, payment condition and both actions within short desktop viewports.
-   Tablet widths retain two stacked actions; their smaller title offsets that row. */
+@media(max-width:374px){.clear-title{font-size:31px}.clear-versions{font-size:26px}.clear-timing{font-size:22px}.clear-offer{padding-left:14px;padding-right:12px}.clear-price strong{font-size:53px}.clear-price{gap:14px}.clear-description{font-size:12px}.clear-button{font-size:12px;gap:5px}.clear-listen{font-size:11px}}
+/* Keep the offer and four actions in view on short desktop screens. */
 @media(min-width:641px) and (max-height:800px){
   .clear-header{min-height:76px;padding-block:13px}
   .clear-hero{padding-top:28px;padding-bottom:34px;gap:32px}
@@ -89,9 +88,9 @@
   .clear-versions{font-size:30px;line-height:1.15}
   .clear-timing{margin:5px 0 8px;font-size:23px;line-height:1.2}
   .clear-price strong{font-size:52px}
-  .clear-payment{margin:14px 0 15px;font-size:18px;line-height:1.25}
+  .clear-payment{margin:12px 0}
   .clear-actions{gap:8px}
-  .clear-button{min-height:53px;padding-block:12px}
+  .clear-button{min-height:47px;padding-block:10px}
   .clear-listen{margin-top:14px}
   .clear-person .clear-photo{height:360px}
 }
