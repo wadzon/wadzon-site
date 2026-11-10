@@ -1,16 +1,12 @@
 <!doctype html>
-<html lang="ru"><head><script data-public-order-routing>/* Run before analytics. Existing private links keep their original order. */
+<html lang="ru"><head><script data-public-order-routing>/* Strip retired chat tokens before analytics and keep ordinary anchors. */
 (() => {
   'use strict';
-  const fragment = location.hash;
+  const fragment = location.hash.startsWith('#chat=') ? '' : location.hash;
+  if (location.hash !== fragment) history.replaceState(null, '', location.pathname + location.search);
   if (location.hostname === 'wadzon.ru') {
-    if (/^#chat=/.test(fragment)) history.replaceState(null, '', location.pathname + location.search);
     location.replace('https://wadzon.com' + location.pathname + location.search + fragment);
-    return;
   }
-  if (!/^#chat=/.test(fragment)) return;
-  history.replaceState(null, '', location.pathname + location.search);
-  location.replace('/order-status.html' + fragment);
 })();
 </script><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Песни на заказ — примеры, условия и цены | WADZON</title><meta name="description" content="Послушайте примеры песен для мужа, мамы, папы, свадьбы и дня рождения. Текст, музыка, вокал и две полные версии за 1 час. Условия оплаты и дополнений.">
